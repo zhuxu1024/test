@@ -24,7 +24,7 @@
         </Form-item>
     </Form>
   </div>
-</div>
+</div>    
 </template>
 
 <script>
