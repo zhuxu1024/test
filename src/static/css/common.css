@@ -1,0 +1,79 @@
+*{margin:0; padding:0;}
+*:focus { outline: none; }
+body, input, button, select, textarea{ font-family:"Microsoft YaHei"; font-size:12px; color: #000;}
+h1, h2, h3, h4, h5, h6{font-size:100%; font-weight: normal;}
+li{list-style-type:none;}
+img,input{vertical-align:middle;}
+img{ max-width: 100%;}
+a{text-decoration:none; color: #000;}
+a:hover{text-decoration:none;}
+a img{border: none;}
+cite,em{ font-style:normal;}
+.clear{clear:both; font:0px/0px sans-serif; display:block;}
+.cfix:after{content:".";visibility:hidden;display:block;clear:both;height:0;}
+.cfix{zoom:1;}
+#dlBox { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;}
+.fLeft, .record_nav dt, .dd_list, .report_list li, .subject_video dd{ float: left;}
+.fRight{ float: right;}
+.ine_block, .li_list a, .test_li_list a.exercise, .test_li_list a.analyse{ display: inline-block; }
+.block, .reg_btn, .warn, .test_li_list span, .subject_more{ display:block;}
+.center, .reg_btn, .user_info, .li_list, .details_header, .subject_video dd, .agree{ text-align: center;}
+.cursor, .btn, .li_list, .btn_v1, .dd_list, .report_list li, .subject_video dd, .test_li_list, .record_select dl dd{ cursor:pointer;}
+.box_sizing, .checkboxFive, .inpText, .login, .register, .register, .studentHome_left, .record_seach, .studentDetail_right, .report_list li div, .record_select dl, .report_list li{ box-sizing:border-box;}
+.rel, .checkboxFive, .record_seach, .report_list li div, .reg_yzm{ position: relative; }
+.abs, .checkboxFive label, .checkboxFive label:after, .search_btn, .search_txt, .report_list li div a, .record_select dl{ position: absolute;}
+.bold, .user_name, .record_nav dt, .title_h3{ font-weight: bold; }
+.search_txt, .search_btn{ border: none; }
+/*size*/
+.test_li_list span em{ font-size: 56px; }
+.size_24, .user_name{ font-size:24px; line-height: 24px;}
+.size_20, .title_h2{ font-size: 20px; line-height: 20px;}
+.size_18{ font-size:18px; line-height: 18px;}
+.size_16, .inpText, .btn, .reg_btn, .li_list, .record_nav dt, .title_h3, .subject_more, .record_select dl{ font-size:16px; line-height: 16px;}
+.size_14, .user_school, .btn_v1, .dd_list a, .time, .test_li_list span, .test_li_list a.exercise, .test_li_list a.analyse, .details p, .title_h4, .subject_video dd{ font-size:14px;}
+.size_12{ font-size:12px;}
+/*color*/
+.col_808, .inpText, .pswBox, .pswBox a, .user_school, .li_list a, .dd_list a, .time, .test_li_list span, .report_list li div a.pos_1, .agree, .record_select dl dd, .li_list a:hover{ color:#808080;}
+.col_222, .user_name, .record_nav dt, .title_h2, .search_txt, .details p, .title_h4, .subject_video dd a, .agree a, .record_select dl{ color: #222;}
+.col_73a, .reg_btn, .subject_video .title_h3, .report_list li div a.pos_2, .record_select dl dd:hover{ color:#73a92f;}
+.col_fff, .btn, .reg_btn:hover, .li_list_active a, .btn_v1, .btn_v1 a, .subject_more, .btn_v1, .subject_more:hover, .li_list_active a:hover, .test_li_list a.exercise:hover, .test_li_list a.analyse:hover{ color:#fff;}
+.col_db1, .warn{color:#db1616;}
+.col_ffa, .li_list_math em{ color: #ffa939 }
+.col_258, .li_list_english em{ color: #258ce3; }
+.col_008, .report .title_h3{ color: #0088d4; }
+.col_d33{ color: #d33438; }
+.col_ea7, .details .title_h3{ color: #ea7b28 }
+.bg_col_73a, .btn_v1{ background:#73a92f;}
+.bg_col_fff, .login, .register, .checkboxFive, .studentHome_left, .chart, .record, .test_list li, .search_btn, .studentDetail_right, .record_select dl{ background-color: #fff; }
+.bg_col_f6f, .record_select dl dd:hover{ background-color: #f6f6f6; }
+.bg_col_629, .btn:hover, .reg_btn:hover{ background:#629521;}
+.bg_col_ffa, .li_list_math .btn_v1, .subject_more{ background-color: #ffa939; }
+.bg_col_258, .li_list_english .btn_v1{ background-color: #258ce3; }
+.bg_col_f3f, .record_box{ background-color: #f3f3f3; }
+.bor_col_dcd, .record_seach{ border:1px solid #dcdcdc; }
+.bor_col_629, .btn:hover, .reg_btn:hover{ border: 1px solid #629521;}
+
+.bor_col_db1, .warn{ border:1px solid #db1616;}
+.bor_col_808, .checkboxFive label, .report_list li div a.pos_1{ border: 1px solid #808080; }
+.bor_b_col_eee{ border-bottom: 1px solid #eee;}
+.bor_col_eee, .report_list li div, .subject_video dd{ border: 1px solid #eee; }
+.bor_col_dcd, .record_select dl, .inpText{ border: 1px solid #dcdcdc; }
+.bor_col_73a, .inpText:focus, .report_list li div a.pos_2, .yzmBorder{ border: 1px solid #73a92f;}
+/*common icon*/
+.inpText, .user_name, .li_list a, .record_nav dt, .test_li_list a.exercise, .test_li_list a.analyse, .search_btn, .title_h3, .report_list li, .subject_video dd a, .subject_more, .register .record_select .inpText{background-image:url("../img/icon.png"); background-repeat:no-repeat;}
+/*margin*/
+.mb20, .test_li_list span, .user_img, .li_list{ margin-bottom: 20px; }
+.mb18, .pswBox, .inpText, .btn, .reg_btn{ margin-bottom: 18px; }
+.mb15, .test_li_list span{ margin-bottom: 15px; }
+.mb12, .test_list li{ margin-bottom: 12px; }
+/*line-height*/
+.record_nav, .btn_v1{height: 24px; line-height: 24px;}
+.report_list li div a, .btn_v1{ border-radius: 12px;}
+.studentHome_left, .chart, .record_box, .studentDetail_right{ border-radius: 8px; box-shadow: 10px 0px 20px 0px rgba(255,218,99,0.1);}
+.report_list li:hover, .subject_video dd:hover, .test_list li:hover, .record_select dl{ box-shadow: 0px 0px 20px rgba(236,236,236,1);}
+/*common button 1*/
+.btn_v1{ padding: 0 12px;}
+
+.studentHome_right, .studentDetail_right{ width: 940px; }
+.chart, .record, .studentDetail_right{ padding: 0 28px; }
+.test_list_center, .test_list_right{ padding: 30px 30px 0 30px; }
