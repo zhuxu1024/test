@@ -30,6 +30,6 @@ export default {
 .tabTitle a.tabTitleActive{border-bottom:2px solid #2d8cf0;}
 .tabTitle a:hover{ color: #000;}
 .tabCon{ padding: 20px 10px; min-height: 590px;}
-.tabCon .ivu-select, .tabCon .ivu-input{ width: 300px; }
-
+.tabCon .ivu-input{ width: 300px; }
+.tabCon .ivu-select{ width: 147px; }
 </style>

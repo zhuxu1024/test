@@ -29,8 +29,8 @@ cite,em{ font-style:normal;}
 .size_24, .user_name{ font-size:24px; line-height: 24px;}
 .size_20, .title_h2{ font-size: 20px; line-height: 20px;}
 .size_18{ font-size:18px; line-height: 18px;}
-.size_16, .inpText, .btn, .reg_btn, .li_list, .record_nav dt, .title_h3, .subject_more, .record_select dl{ font-size:16px; line-height: 16px;}
-.size_14, .user_school, .btn_v1, .dd_list a, .time, .test_li_list span, .test_li_list a.exercise, .test_li_list a.analyse, .details p, .title_h4, .subject_video dd{ font-size:14px;}
+.size_16, .inpText, .btn, .reg_btn, .li_list, .record_nav dt, .title_h3, .subject_more, .record_select dl, .title_h4{ font-size:16px; line-height: 16px;}
+.size_14, .user_school, .btn_v1, .dd_list a, .time, .test_li_list span, .test_li_list a.exercise, .test_li_list a.analyse, .details p, .subject_video dd{ font-size:14px;}
 .size_12{ font-size:12px;}
 /*color*/
 .col_808, .inpText, .pswBox, .pswBox a, .user_school, .li_list a, .dd_list a, .time, .test_li_list span, .report_list li div a.pos_1, .agree, .record_select dl dd, .li_list a:hover{ color:#808080;}
@@ -40,7 +40,7 @@ cite,em{ font-style:normal;}
 .col_db1, .warn{color:#db1616;}
 .col_ffa, .li_list_math em{ color: #ffa939 }
 .col_258, .li_list_english em{ color: #258ce3; }
-.col_008, .report .title_h3{ color: #0088d4; }
+.col_008, .report .title_h3, .subject_video .last-child h5{ color: #0088d4; }
 .col_d33{ color: #d33438; }
 .col_ea7, .details .title_h3{ color: #ea7b28 }
 .bg_col_73a, .btn_v1{ background:#73a92f;}
@@ -66,6 +66,7 @@ cite,em{ font-style:normal;}
 .mb18, .pswBox, .inpText, .btn, .reg_btn{ margin-bottom: 18px; }
 .mb15, .test_li_list span{ margin-bottom: 15px; }
 .mb12, .test_list li{ margin-bottom: 12px; }
+.ml25{ margin-left: 25px; }
 /*line-height*/
 .record_nav, .btn_v1{height: 24px; line-height: 24px;}
 .report_list li div a, .btn_v1{ border-radius: 12px;}

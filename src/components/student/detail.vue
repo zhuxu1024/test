@@ -16,22 +16,21 @@
       <ul class="report_list cfix">
         <li class="li_zdbg">
           <div>
-            <h4 class="title_h4">{{dataDetail.title}}</h4>
-            <span class="size_12 col_222">诊断报告</span>
+            <!-- <h4 class="title_h4">{{dataDetail.title}}</h4>
+            <span class="size_12 col_222">诊断报告</span> -->
+            <h4 class="title_h4">诊断报告</h4>
             <a target="_blank" :href="dataDetail.report.url" class="pos_1">在线查看</a><a :href="dataDetail.report.url" download="dataDetail.title" class="pos_2">下载文件</a>
           </div>
         </li>
         <li class="li_sjyj">
           <div>
-            <h4 class="title_h4">{{dataDetail.title}}</h4>
-            <span class="size_12 col_222">试卷原件</span>
+            <h4 class="title_h4">试卷原件</h4>
             <a target="_blank" :href="dataDetail.paper.copyUrl" class="pos_1">在线查看</a><a :href="dataDetail.paper.copyUrl" download="dataDetail.title" class="pos_2">下载文件</a>
           </div>
         </li>
         <li class="li_dtyj">
           <div>
-            <h4 class="title_h4">{{dataDetail.title}}</h4>
-            <span class="size_12 col_222">答题原件</span>
+            <h4 class="title_h4">答题原件</h4>
             <a target="_blank" :href="dataDetail.answerCopyUrl" class="pos_1">在线查看</a><a :href="dataDetail.answerCopyUrl" :download="dataDetail.title" class="pos_2" >下载文件</a>
           </div>
         </li>
@@ -39,19 +38,25 @@
     </div><!-- report end -->
     <div class="subject_video">
       <h3 class="title_h3 bor_b_col_eee">试题视频解析</h3>
-      <div class="subject_error">
+      <div class="subject_error ml25">
         <h5 class="size_16 col_d33 bold">错误题目解析视频</h5>
         <dl class="cfix">
           <dd v-for="(wrongData,index) in wrongDatas"><a @click='_dialog(wrongData,index)'>第{{wrongData.sequence}}题</a></dd>
         </dl>
       </div>
-      <div class="subject_torrect">
+      <div class="subject_torrect ml25">
         <h5 class="size_16 col_73a bold">正确题目解析视频</h5>
         <dl class="cfix">            
-          <dd v-for="(rightData,index) in rightDatas" v-if="index <= num"><a @click='_dialog(rightData)'>第{{rightData.sequence}}题</a><a class="last-child">知识点</a></dd>
+          <dd v-for="(rightData,index) in rightDatas" v-if="index <= num"><a @click='_dialog(rightData)'>第{{rightData.sequence}}题</a></dd>
           <dd class="dd_more" v-if="moreShow" @click="moreClick"><a>查看全部</a></dd>
         </dl>
       </div>
+      <!-- <div class="subject_torrect ml25 last-child">
+        <h5 class="size_16 col_73a bold">本卷知识点视频</h5>
+        <dl class="cfix">            
+          <dd v-for="(rightData,index) in rightDatas"><a>知识点</a></dd>
+        </dl>
+      </div> -->
     </div><!-- word_video end -->
     <a class="subject_more">智能配套习题</a>
     <Modal v-model="modal1" :title="videoTitle" @on-cancel="cancel" width="672">
@@ -173,19 +178,19 @@ body{ background: #eee; }
 .report_list{ width: 918px; }
 .report_list li{ width: 270px; padding-left: 80px; margin-right: 36px;}
 .report_list li:hover, .subject_video dd:hover{ box-shadow: 0px 0px 20px rgba(236,236,236,1);}
-.report_list li div{ height: 95px; padding: 12px;}
-.report_list li div a.pos_1, .report_list li div a.pos_2{ bottom: 10px; height: 18px; line-height: 16px; padding:0 8px;}
+.report_list li div{ height: 95px; padding: 14px;}
+.report_list li div a.pos_1, .report_list li div a.pos_2{ bottom: 18px; height: 18px; line-height: 16px; padding:0 8px;}
 .report_list li div a.pos_1{ left: 12px;}
 .report_list li div a.pos_2{ right:12px;}
 .li_zdbg{ background-position: 0 -304px;}
 .li_sjyj{ background-position: 0 -399px;}
 .li_dtyj{ background-position: 0 -494px;}
 .title_h4{ margin-bottom: 8px; }
-.subject_video h5{ margin-bottom: 20px; margin-left: 26px;}
+.subject_video h5{ margin-bottom: 20px;}
 .subject_video dl{ width: 900px; margin-bottom: 12px;}
 .subject_video dd{ margin: 0 20px 16px 0; padding: 10px 14px;}
-.subject_video dd a{  background-position: right -316px; padding-right: 24px; height: 22px; line-height: 22px;}
-.subject_video dd a.last-child{background-position: -274px -276px; border-left: 1px solid #e5e5e5; padding: 0 0 0 33px; margin-left: 8px;}
+.subject_video dd a{  background-position: right -314px; padding-right: 24px; height: 22px; line-height: 22px;}
+.subject_video .last-child a{background-position: right -274px;}
 .subject_video dd.dd_more{ width: 175px; }
 .subject_video dd.dd_more a{ background-position: right -505px; padding-right: 18px; }
 .subject_more{ width: 272px; height: 48px; line-height: 48px; text-align: center; border-radius: 8px; margin: 0 auto; background-position: -99px -447px; margin-top: 34px;}

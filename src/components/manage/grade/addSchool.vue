@@ -4,6 +4,9 @@
     <div class="mAddSchool tabCon cfix">
      <Form :label-width="100">
         <Form-item label="选择省市区">
+            <Select v-model="selectValueCity" @on-change="onChangeCity">
+                <Option :value="addCity.id" :key="addCity.id">{{addCity.name}}</Option>
+            </Select>
             <Select v-model="selectValue" @on-change="onChange">
                 <Option v-for="item in schoolInfos" :value="item.id" :key="item.id">{{ item.name }}</Option>
             </Select>
@@ -24,9 +27,9 @@
         </Form-item>
     </Form>
   </div>
-</div>    
+</div>
 </template>
-<!-- 1111 -->
+
 <script>
 import gradeNav from './gradeNav';
 export default {
@@ -41,6 +44,12 @@ export default {
             classConfig: [],
             name: ""
         },
+        addCity:{
+            id:'101',
+            name:'上海市',
+            type:null
+        },
+        selectValueCity:'',
         schoolInfos:[],
         selectValue:'',
         userToken:'',
@@ -71,17 +80,22 @@ export default {
     // console.log(userInfo);
     this.userToken = userInfo.token; 
     console.log(this.userToken)
-    this.$http.get('http://139.196.164.112:9988/v1/locations?parentId=101')
-      .then((response) => {
-        console.log(response.data)
-        this.schoolInfos = response.data;
-      }).catch(function (response) {
-        console.log(response)
-      })
+    
   },
   methods:{
-     onChange: function(data){//点击下拉框取值on-change返回值默认是option中value;
+    onChange: function(data){//点击下拉框取值on-change返回值默认是option中value;
         this.addSchoolData.areaId = data;
+        console.log(this.addSchoolData.areaId)
+    },
+    onChangeCity: function(data){
+        console.log(data)
+        this.$http.get('http://139.196.164.112:9988/v1/locations?parentId='+data)
+          .then((response) => {
+            console.log(response.data)
+            this.schoolInfos = response.data;
+          }).catch(function (response) {
+            console.log(response)
+          })
     },
     addSchoolSubmit: function(){
         var that = this;
@@ -96,8 +110,8 @@ export default {
         console.log(that.addSchoolData)
         that.$http.post('http://139.196.164.112:9988/v1/school/init?token='+this.userToken, that.addSchoolData).then((response) => {
             console.log(response.data)//返回值;
-            var result = response.data;
           }).catch(function (response) {
+            console.log(1)
             console.log(response)
           })
     }

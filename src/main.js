@@ -6,6 +6,7 @@ import App from './App'
 import routes from './router/index'
 import $ from 'jquery';
 import VueResource from 'vue-resource';
+import VueFileUpload from 'vue-file-upload';
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';
 Vue.use(VueResource);
