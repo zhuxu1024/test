@@ -1,4 +1,4 @@
-.userBg{ background: #f6f6f6 url("../img/login_bg.png") no-repeat 0 center; padding: 100px 0;}
+.userBg{ background: #f6f6f6 url("../img/login_bg.png") no-repeat 0 center;}
 .login, .register{ height:480px; margin:0 auto; padding:40px 50px 0; border-radius: 4px; box-shadow: 0px 3px 7px 0px rgba(115, 169, 47, 0.1);}
 .user_logo{ margin-bottom:44px;}
 .inpText, .btn, .reg_btn{ width:272px; height:48px; line-height:48px; border-radius:4px;}

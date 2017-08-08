@@ -3,12 +3,9 @@
     <gradeNav :page="this.$route.params.page"></gradeNav><!-- 导航 -->
     <div class="mAddSchool tabCon cfix">
      <Form :label-width="100">
-        <Form-item label="选择省市区">
-            <Select v-model="selectValueCity" @on-change="onChangeCity">
-                <Option :value="addCity.id" :key="addCity.id">{{addCity.name}}</Option>
-            </Select>
-            <Select v-model="selectValue" @on-change="onChange">
-                <Option v-for="item in schoolInfos" :value="item.id" :key="item.id">{{ item.name }}</Option>
+        <Form-item label="选择省市区" prop="containnerId">
+            <Select style="margin-right: 10px;" v-for="LinkageInfo in LinkageInfos" :value="LinkageInfo.id" :key="LinkageInfo.id" v-model="LinkageInfo.selValue" @on-change="onChangeCity(LinkageInfo)">
+                <Option v-for="arrayList in LinkageInfo.arrayLists" :value="arrayList.id" :key="arrayList.id">{{arrayList.name}}</Option>
             </Select>
         </Form-item>
         <Form-item label="填写学校名称">
@@ -44,14 +41,25 @@ export default {
             classConfig: [],
             name: ""
         },
-        addCity:{
-            id:'101',
-            name:'上海市',
-            type:null
-        },
-        selectValueCity:'',
-        schoolInfos:[],
-        selectValue:'',
+        LinkageInfos:[
+            {
+              arrayLists:[{
+                    id: "101",
+                    name: "上海",
+                    type: null
+                }
+              ],
+              id:0,
+              title:'选择市',
+              selValue:''
+            },
+            {
+              arrayLists:[],
+              id:1,
+              title:'选择地区',
+              selValue:''
+            }
+        ],
         userToken:'',
         formItem: [
             {
@@ -77,25 +85,25 @@ export default {
   },
   mounted(){
     var userInfo = JSON.parse(localStorage.getItem('userInfo'));//存入缓存的string转换成json
-    // console.log(userInfo);
     this.userToken = userInfo.token; 
     console.log(this.userToken)
-    
   },
   methods:{
-    onChange: function(data){//点击下拉框取值on-change返回值默认是option中value;
-        this.addSchoolData.areaId = data;
-        console.log(this.addSchoolData.areaId)
-    },
     onChangeCity: function(data){
-        console.log(data)
-        this.$http.get('http://139.196.164.112:9988/v1/locations?parentId='+data)
-          .then((response) => {
-            console.log(response.data)
-            this.schoolInfos = response.data;
-          }).catch(function (response) {
-            console.log(response)
-          })
+        var that = this;
+        var i = data.id + 1;
+        if( i <= that.LinkageInfos.length -1){
+            that.$http.get('http://139.196.164.112:9988/v1/locations?parentId='+data.selValue)
+              .then((response) => {
+                that.LinkageInfos[i].arrayLists = response.data;
+              }).catch(function (response) {
+                console.log(response)
+            })
+        }
+        if( i == that.LinkageInfos.length){
+          that.addSchoolData.areaId = data.selValue;
+        }
+        console.log(that.addSchoolData.areaId)
     },
     addSchoolSubmit: function(){
         var that = this;
@@ -107,13 +115,21 @@ export default {
                 that.addSchoolData.classConfig.push(item);
             }
         });
-        console.log(that.addSchoolData)
-        that.$http.post('http://139.196.164.112:9988/v1/school/init?token='+this.userToken, that.addSchoolData).then((response) => {
-            console.log(response.data)//返回值;
-          }).catch(function (response) {
-            console.log(1)
-            console.log(response)
-          })
+        if( that.addSchoolData.areaId == '' ){
+            that.$message.error('请选择省市区!');
+        }else if( that.addSchoolData.name == ''){
+            that.$message.error('请填写学校名称!');
+        }else if(that.addSchoolData.classConfig.length <= 0){
+            that.$message.error('请选择年级班级!');
+        }else{
+            that.$http.post('http://139.196.164.112:9988/v1/school/init?token='+this.userToken, that.addSchoolData).then((response) => {
+                console.log(response.data)//返回值;
+                that.$message.success('提交成功！');
+              }).catch(function (response) {
+                console.log(1)
+                console.log(response)
+              })
+        }
     }
   }
 }

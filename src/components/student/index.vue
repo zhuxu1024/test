@@ -1,6 +1,7 @@
 <template>
+<div>
+  <div class="bgCom bg_col_eee"></div>
   <div class="studentHome cfix">
-    <!-- 学生主页左侧导航 start -->
     <studentNav :message="this.$route.params.num" @listenToChildEvent="getListData"></studentNav>
     <!-- 学生主页左侧导航 end -->
     <!-- 考试记录 start -->
@@ -31,6 +32,7 @@
       </div>
     </div><!-- 考试记录 end -->
   </div>
+</div>
 </template>
 
 <script>
@@ -53,25 +55,29 @@ export default {
     var userInfo = JSON.parse(localStorage.getItem('userInfo'));//存入缓存的string转换成json
     // console.log(userInfo);
     this.userToken = userInfo.token; 
+    console.log(this.userToken);
     this.listId = this.$route.params.num?this.$route.params.num:0;
     this.getListData(this.listId);
   },
   methods:{
     getListData: function(i){//考试列表
       this.listId = i;
+      console.log(i)
       var listUrl = 'http://139.196.164.112:9988/v1/examRecords?token='
         + this.userToken +'&offset=0&limit=2&subjectId=' + i;
       if( i == 0){
         listUrl = 'http://139.196.164.112:9988/v1/examRecords?token='
         + this.userToken +'&offset=0&limit=2';
-      }
+      }//不加参数subjectId查找全部考试列表，加参数查找数学或英语考试列表
+      // subjectId删除获取全部列表
       this.$http.get(listUrl)
         .then((response) => {
           console.log(response.data)
           this.dataLists = response.data.data;
+          console.log(this.dataLists)
         }).catch(function (response) {
           console.log(response)
-          console.log('请重新登录后查看！')
+          console.log('登录验证过期，请重新登录后查看！')
             //this.$router.push({path: '/user/login'})
           })
     },
@@ -85,10 +91,6 @@ export default {
 </script>
 
 <style>
-body{ background: #eee; }
-.studentHome{ width: 1200px; margin: 0 auto; }
-.studentHome_left{ width: 240px; padding: 20px 35px;}
-.studentHome_right{ width: 940px; }
 .record_box{ padding-bottom: 50px; }
 .chart, .record, .studentDetail_right{ padding: 0 28px; }
 .chart{ padding-top: 20px; padding-bottom:20px;}

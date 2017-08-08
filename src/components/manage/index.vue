@@ -22,6 +22,7 @@ export default {
 </script>
 
 <style>
+
 .manage{ width: 1200px; margin: 0 auto; }
 .manageNav, .manageNav .ivu-menu-dark, .manageCon{ background: #eee;}
 .manageCon{ width: 940px;}
@@ -29,7 +30,16 @@ export default {
 .tabTitle a{ font-size: 14px; display: inline-block; height: 50px; line-height: 50px; padding: 0 10px;  color: #000;}
 .tabTitle a.tabTitleActive{border-bottom:2px solid #2d8cf0;}
 .tabTitle a:hover{ color: #000;}
-.tabCon{ padding: 20px 10px; min-height: 590px;}
+.tabCon{ padding: 20px 10px; min-height: 590px; color: #495060;}
 .tabCon .ivu-input{ width: 300px; }
-.tabCon .ivu-select{ width: 147px; }
+.tabCon .ivu-select{ width: 130px; }
+.tabCon .ivu-form-item-label:before {
+    content: '*';
+    display: inline-block;
+    margin-right: 4px;
+    line-height: 1;
+    font-family: SimSun;
+    font-size: 12px;
+    color: #ed3f14;
+  }
 </style>

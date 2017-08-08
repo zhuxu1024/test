@@ -1,5 +1,6 @@
 <template>
-<div class="userBg">
+<div>
+  <div class="bgCom userBg"></div>
   <div class="login">
     <img class="user_logo" src="../../static/img/login_logo.png">
     <form>
@@ -64,8 +65,8 @@ export default {
             var result = response.data;
             result = JSON.stringify(result);//json缓存需转换string
             localStorage.setItem('userInfo', result)
-            //that.$router.push({path: '/student/index'})
-            that.$router.push({path: '/grade/addSchool/1/0'})
+            that.$router.push({path: '/student/index/0'})
+            //that.$router.push({path: '/grade/addSchool/1/0'})
           }).catch(function (response) {
             if(response.status == 401){
               that.isUesrName = true;

@@ -26,8 +26,7 @@ export default {
 .manageNav{ width: 240px; height: 640px;}
 .manageNav .ivu-menu-dark{ padding-bottom: 100px;}
 .manageNav .ivu-menu-vertical .ivu-menu-item{ padding: 0; }
-/*.manageNav .ivu-menu-vertical .ivu-menu-item:first-child{ border-top-left-radius: 8px; border-top-right-radius: 8px; }*/
-.manageNav .ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active, .manageNav .ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:hover{ background: #2d8cf0; border-right: none;}
+.manageNav .ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active, .manageNav .ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:hover, .manageNav .ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu){ background: #2d8cf0; border-right: none;}
 .manageNav a{ display: block; color: #000; padding: 14px 24px;}
 .manageNav .ivu-menu-item-active a{ color: #fff; }
 .manageNav a:hover{ background: #2d8cf0; color: #fff;}

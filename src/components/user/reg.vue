@@ -1,5 +1,6 @@
 <template>
-<div class="userBg">
+<div>
+  <div class="bgCom userBg"></div>
   <div class="register">
     <img class="user_logo" src="../../static/img/login_logo.png">
     <form>
@@ -11,13 +12,13 @@
       <input type="password" placeholder="设置密码" class="inpText fLeft" v-model="regModel.password"v-if="!isRegPw">
       <input type="text" placeholder="设置密码" class="fLeft inpText warn" v-model="regModel.password" v-if="isRegPw" >
       <input type="password" placeholder="请确认密码" class="inpText fRight" v-model="passwordTwo" v-if="!isRegPw2">
-      <input type="text" placeholder="请确认密码" class="fRight inpText warn" v-model="passwordTwo" v-if="isRegPw2" >
+      <input type="text" placeholder="请确认密码" class="fRight inpText warn" v-model="passwordTwo" v-if="isRegPw2">
     	<div class="cfix record_select">
         <div class="fLeft rel" v-for="(studentInfo,index) in studentInfos">
-          <input type="text" v-model='studentInfo.selValue' class="inpText" v-bind:placeholder="studentInfo.title" v-on:focus="selToggle(index)" v-on:blur="isHide(index)" :class="{'warn':studentInfo.order === index}" :data-id="studentInfo.order">
+          <input type="text" v-model='studentInfo.selValue' class="inpText" v-bind:placeholder="studentInfo.title" @focus="selToggle(index)" @blur="isHide(index)" :class="{'warn':studentInfo.order === index}" :data-id="studentInfo.order">
           <dl class="select_dl_1" v-if="studentInfo.isTrue">
             <dt>{{studentInfo.title}}</dt>
-            <dd v-for="item in studentInfo.arrayList" v-on:click='onChange(item,studentInfo,index)'><div>{{item.name}}</div></dd>
+            <dd v-for="item in studentInfo.arrayList" @click='onChange(item,studentInfo,index)'><div>{{item.name}}</div></dd>
           </dl>
         </div>
     	</div>
@@ -30,7 +31,7 @@
           <label for="checkboxFiveInput"></label>
         </div>
     	</div>
-    	<input type="button" value="注册" class="btn bor_col_73a bg_col_73a" v-on:click="regSubmit">
+    	<input type="button" value="注册" class="btn bor_col_73a bg_col_73a" @click="regSubmit">
     </form>
   </div>
 </div>

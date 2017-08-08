@@ -30,37 +30,39 @@ cite,em{ font-style:normal;}
 .size_20, .title_h2{ font-size: 20px; line-height: 20px;}
 .size_18{ font-size:18px; line-height: 18px;}
 .size_16, .inpText, .btn, .reg_btn, .li_list, .record_nav dt, .title_h3, .subject_more, .record_select dl, .title_h4{ font-size:16px; line-height: 16px;}
-.size_14, .user_school, .btn_v1, .dd_list a, .time, .test_li_list span, .test_li_list a.exercise, .test_li_list a.analyse, .details p, .subject_video dd{ font-size:14px;}
+.size_14, .user_school, .btn_v1, .dd_list a, .time, .test_li_list span, .test_li_list a.exercise, .test_li_list a.analyse, .details p, .subject_video dd, .questionList li, .studentExercises_right .ivu-tabs.ivu-tabs-card>.ivu-tabs-bar .ivu-tabs-tab, .questionList li .ivu-radio-wrapper{ font-size:14px;}
 .size_12{ font-size:12px;}
 /*color*/
 .col_808, .inpText, .pswBox, .pswBox a, .user_school, .li_list a, .dd_list a, .time, .test_li_list span, .report_list li div a.pos_1, .agree, .record_select dl dd, .li_list a:hover{ color:#808080;}
 .col_222, .user_name, .record_nav dt, .title_h2, .search_txt, .details p, .title_h4, .subject_video dd a, .agree a, .record_select dl{ color: #222;}
 .col_73a, .reg_btn, .subject_video .title_h3, .report_list li div a.pos_2, .record_select dl dd:hover{ color:#73a92f;}
-.col_fff, .btn, .reg_btn:hover, .li_list_active a, .btn_v1, .btn_v1 a, .subject_more, .btn_v1, .subject_more:hover, .li_list_active a:hover, .test_li_list a.exercise:hover, .test_li_list a.analyse:hover{ color:#fff;}
+.col_fff, .btn, .reg_btn:hover, .li_list_active a, .btn_v1, .btn_v1 a, .subject_more, .btn_v1, .subject_more:hover, .li_list_active a:hover, .test_li_list a.exercise:hover, .test_li_list a.analyse:hover, .studentExercises_right .ivu-tabs.ivu-tabs-card>.ivu-tabs-bar .ivu-tabs-tab{ color:#fff;}
 .col_db1, .warn{color:#db1616;}
 .col_ffa, .li_list_math em{ color: #ffa939 }
 .col_258, .li_list_english em{ color: #258ce3; }
 .col_008, .report .title_h3, .subject_video .last-child h5{ color: #0088d4; }
 .col_d33{ color: #d33438; }
 .col_ea7, .details .title_h3{ color: #ea7b28 }
+.col_454, .studentExercises_right .ivu-tabs.ivu-tabs-card>.ivu-tabs-bar .ivu-tabs-tab.ivu-tabs-tab-active, .questionList li{color: #454e55;}
 .bg_col_73a, .btn_v1{ background:#73a92f;}
-.bg_col_fff, .login, .register, .checkboxFive, .studentHome_left, .chart, .record, .test_list li, .search_btn, .studentDetail_right, .record_select dl{ background-color: #fff; }
+.bg_col_fff, .login, .register, .checkboxFive, .studentHome_left, .chart, .record, .test_list li, .search_btn, .studentDetail_right, .record_select dl, .studentExercises_right .ivu-tabs-content{ background-color: #fff; }
 .bg_col_f6f, .record_select dl dd:hover{ background-color: #f6f6f6; }
 .bg_col_629, .btn:hover, .reg_btn:hover{ background:#629521;}
 .bg_col_ffa, .li_list_math .btn_v1, .subject_more{ background-color: #ffa939; }
 .bg_col_258, .li_list_english .btn_v1{ background-color: #258ce3; }
 .bg_col_f3f, .record_box{ background-color: #f3f3f3; }
+.bg_col_eee{ background-color: #eee; }
 .bor_col_dcd, .record_seach{ border:1px solid #dcdcdc; }
 .bor_col_629, .btn:hover, .reg_btn:hover{ border: 1px solid #629521;}
-
 .bor_col_db1, .warn{ border:1px solid #db1616;}
 .bor_col_808, .checkboxFive label, .report_list li div a.pos_1{ border: 1px solid #808080; }
 .bor_b_col_eee{ border-bottom: 1px solid #eee;}
 .bor_col_eee, .report_list li div, .subject_video dd{ border: 1px solid #eee; }
 .bor_col_dcd, .record_select dl, .inpText{ border: 1px solid #dcdcdc; }
 .bor_col_73a, .inpText:focus, .report_list li div a.pos_2, .yzmBorder{ border: 1px solid #73a92f;}
+.bgCom{  position: fixed; width: 100%; z-index: -1; height: 100%; top: 0px; left: 0; bottom:0; right: 0; }
 /*common icon*/
-.inpText, .user_name, .li_list a, .record_nav dt, .test_li_list a.exercise, .test_li_list a.analyse, .search_btn, .title_h3, .report_list li, .subject_video dd a, .subject_more, .register .record_select .inpText{background-image:url("../img/icon.png"); background-repeat:no-repeat;}
+.inpText, .user_name, .li_list a, .record_nav dt, .test_li_list a.exercise, .test_li_list a.analyse, .search_btn, .title_h3, .report_list li, .subject_video dd a, .subject_more, .register .record_select .inpText, .studentExercises_right .ivu-tabs.ivu-tabs-card>.ivu-tabs-bar .ivu-tabs-tab-active{background-image:url("../img/icon.png"); background-repeat:no-repeat;}
 /*margin*/
 .mb20, .test_li_list span, .user_img, .li_list{ margin-bottom: 20px; }
 .mb18, .pswBox, .inpText, .btn, .reg_btn{ margin-bottom: 18px; }
@@ -70,11 +72,12 @@ cite,em{ font-style:normal;}
 /*line-height*/
 .record_nav, .btn_v1{height: 24px; line-height: 24px;}
 .report_list li div a, .btn_v1{ border-radius: 12px;}
-.studentHome_left, .chart, .record_box, .studentDetail_right{ border-radius: 8px; box-shadow: 10px 0px 20px 0px rgba(255,218,99,0.1);}
+.studentHome_left, .chart, .record_box, .studentDetail_right, .studentExercises_right .ivu-tabs-content{ border-radius: 8px; box-shadow: 10px 0px 20px 0px rgba(255,218,99,0.1);}
 .report_list li:hover, .subject_video dd:hover, .test_list li:hover, .record_select dl{ box-shadow: 0px 0px 20px rgba(236,236,236,1);}
 /*common button 1*/
 .btn_v1{ padding: 0 12px;}
-
-.studentHome_right, .studentDetail_right{ width: 940px; }
+/*student*/
+.studentHome{ width: 1200px; margin: 0 auto; }
+.studentHome_right, .studentDetail_right, .studentExercises_right{ width: 940px; }
 .chart, .record, .studentDetail_right{ padding: 0 28px; }
 .test_list_center, .test_list_right{ padding: 30px 30px 0 30px; }

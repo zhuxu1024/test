@@ -2,37 +2,25 @@
 <div class="mInfo manageCon fRight">
     <infoNav :page="this.$route.params.page"></infoNav><!-- 导航 -->
     <div class="tabCon cfix">
-     <Form :model="formItem" :label-width="100">
-         <Form-item label="选择省市区">
-            <Select v-model="selectValueCity" @on-change="onChangeCity">
-                <Option :value="addCity.id" :key="addCity.id">{{addCity.name}}</Option>
-            </Select>
-            <Select v-model="selectValue" @on-change="onChange">
-                <Option v-for="item in schoolInfos" :value="item.id" :key="item.id">{{ item.name }}</Option>
+     <Form v-model="addStudentData" :label-width="100">
+         <Form-item label="选择省市区" prop="containnerId">
+            <Select style="margin-right: 10px;" v-for="LinkageInfo in LinkageInfos" :value="LinkageInfo.id" :key="LinkageInfo.id" v-model="LinkageInfo.selValue" @on-change="onChangeCity(LinkageInfo)">
+                <Option v-for="arrayList in LinkageInfo.arrayLists" :value="arrayList.id" :key="arrayList.id">{{arrayList.name}}</Option>
             </Select>
         </Form-item>
-        <!-- <Form-item label="填写学校名称">
-            <Input v-model="formItem.input" placeholder="请输入"></Input>
-        </Form-item>
-        <Form-item label="选择年级">
-            <Checkbox-group v-model="formItem.checkbox">
-                <Checkbox label="6年级"></Checkbox>
-                <Checkbox label="7年级"></Checkbox>
-                <Checkbox label="8年级"></Checkbox>
-            </Checkbox-group>
-        </Form-item> -->
-        <Form-item label="选择文件">
-            <Upload 
-                :on-success="Success" 
-                :format="['csv']"
-                :on-format-error="formatError"
-action="http://139.196.164.112:9988/v1/students/upload?containerId=101001&token=c7f53fac-b74e-4770-99bc-2955edf70193">
-                <Button type="ghost">选择上传文件.CSV</Button>
-            </Upload>
-            <div v-if="file !== null">待上传文件：{{ file }}</div>
-        </Form-item>
+        <el-upload
+          class="upload-demo ml100"
+          ref="upload"
+          :data="addStudentData"
+          :action="'http://139.196.164.112:9988/v1/students/upload?token='+userToken"
+          :auto-upload="false" 
+          :before-upload="beforeAvatarUpload"
+          :on-success="Success" 
+          :on-error="Error">
+          <el-button slot="trigger" size="small" type="primary">选取上传文件</el-button>
+        </el-upload>
         <Form-item>
-            <Button type="primary" @click="addStudentSubmit" :loading="loadingStatus">提交</Button>
+            <Button type="primary" @click="submitUpload">提交</Button>
         </Form-item>
     </Form>
   </div>
@@ -48,95 +36,81 @@ export default {
   },
   data () {
     return {
-        file: null,
-        loadingStatus: false,
-        
-        addCity:{
-            id:'101',
-            name:'上海市',
-            type:null
-        },
         addStudentData:{
-            containerId:'',
-            file:''
+            containerId:''
         },
-        selectValueCity:'',
-        schoolInfos:[],
-        selectValue:'',
-        userToken:'',
-        formItem: {
-            input: '',
-            select: '',
-            radio: 'male',
-            checkbox: [],
-            switch: true,
-            date: '',
-            time: '',
-            slider: [20, 50],
-            textarea: ''
-        }
+        LinkageInfos:[
+            {
+              arrayLists:[{
+                    id: "101",
+                    name: "上海",
+                    type: null
+                }
+              ],
+              id:0,
+              title:'选择市',
+              selValue:''
+            },
+            {
+              arrayLists:[],
+              id:1,
+              title:'选择地区',
+              selValue:''
+            }
+        ],
+        userToken:''
     }
   },
   mounted(){
     var userInfo = JSON.parse(localStorage.getItem('userInfo'));//存入缓存的string转换成json
-    // console.log(userInfo);
     this.userToken = userInfo.token; 
     console.log(this.userToken)
-    // this.$http.get('http://139.196.164.112:9988/v1/locations?parentId=101')
-    //   .then((response) => {
-    //     console.log(response.data)
-    //     this.schoolInfos = response.data;
-    //   }).catch(function (response) {
-    //     console.log(response)
-    //   })
   },
   methods:{
-    onChange: function(data){//点击下拉框取值on-change返回值默认是option中value;
-        this.containerId = data;
-        console.log(this.containerId)
+    onChangeCity: function(data){
+        var that = this;
+        var i = data.id + 1;
+        if( i <= that.LinkageInfos.length -1){
+            that.$http.get('http://139.196.164.112:9988/v1/locations?parentId='+data.selValue)
+              .then((response) => {
+                that.LinkageInfos[i].arrayLists = response.data;
+              }).catch(function (response) {
+                console.log(response)
+            })
+        }
+        if( i == that.LinkageInfos.length){
+          that.addStudentData.containerId = data.selValue;
+        }
+        console.log(that.addStudentData.containerId)
     },
-    onChangeCity: function(data){//获取地区
-        console.log(data)
-        this.$http.get('http://139.196.164.112:9988/v1/locations?parentId='+data)
-          .then((response) => {
-            console.log(response.data)
-            this.schoolInfos = response.data;
-          }).catch(function (response) {
-            console.log(response)
-          })
-    },
-    addStudentSubmit: function(){
-        this.loadingStatus = true;
-        // that.$http.post('http://139.196.164.112:9988/v1/students/upload?token='+that.userToken, that.addStudentData).then((response) => {
-        //     console.log(response.data)//返回值;
-        //   }).catch(function (response) {
-        //     console.log(1)
-        //     console.log(response)
-        //   })
-          
-        setTimeout(() => {
-            this.file = null;
-            this.loadingStatus = false;
-            this.$Message.success('上传成功')
-        }, 1500);
-    },
-    formatError: function(file){
-        this.$Notice.warning({
-            title: '文件格式不正确',
-            desc: '文件 ' + file.name + ' 格式不正确，请上传csv格式的文件。'
-        });
-    },
-    handleUpload (file) {
-        this.file = file.name;
+    beforeAvatarUpload(file) {
+      console.log(file)
+      if (file.type != 'application/vnd.ms-excel') {
+        this.$message.error('上传文件只能是 CSV 格式!');
         return false;
+      }
     },
-    Success: function(response){
+    submitUpload() {
+      if( this.addStudentData.containerId != ''){
+        this.$refs.upload.submit();
+        console.log(this.addStudentData)
+      }else{
+        this.$message.error('请填写完整表单信息!');
+      }  
+    },
+    Success(response){
         console.log(response)
+        this.$message.success('上传文件成功!');
+    },
+    Error(err){
+        console.log(err)
     }
   }
 }
 </script>
 
 <style>
-
+.ivu-btn-primary, .el-button--primary{ width: 100px; height: 30px;}
+.el-button--primary{ background: #c4c4c4; border: none; }
+.ml100{ min-height: 100px; margin-left: 100px; }
 </style>

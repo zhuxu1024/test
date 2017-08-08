@@ -1,68 +1,71 @@
 <template>
-<div class="studentHome cfix">
-  <studentNav :message="this.$route.params.subjectid"></studentNav>
-  <!-- 考试记录详情页 start-->
-  <div id="student_detail" class="fRight studentDetail_right">
-    <div class="details">
-      <div class="details_header">
-        <h2 class="title_h2 bold mb12">{{dataDetail.title}}</h2>
-        <span class="time size_12">{{dataDetail.date}}</span>
-      </div>
-      <h3 class="title_h3 bor_b_col_eee">本次测试目标</h3>
-      <p>{{dataDetail.description}}</p>
-    </div><!-- details end -->
-    <div class="report">
-      <h3 class="title_h3 bor_b_col_eee">诊断报告下载</h3>
-      <ul class="report_list cfix">
-        <li class="li_zdbg">
-          <div>
-            <!-- <h4 class="title_h4">{{dataDetail.title}}</h4>
-            <span class="size_12 col_222">诊断报告</span> -->
-            <h4 class="title_h4">诊断报告</h4>
-            <a target="_blank" :href="dataDetail.report.url" class="pos_1">在线查看</a><a :href="dataDetail.report.url" download="dataDetail.title" class="pos_2">下载文件</a>
-          </div>
-        </li>
-        <li class="li_sjyj">
-          <div>
-            <h4 class="title_h4">试卷原件</h4>
-            <a target="_blank" :href="dataDetail.paper.copyUrl" class="pos_1">在线查看</a><a :href="dataDetail.paper.copyUrl" download="dataDetail.title" class="pos_2">下载文件</a>
-          </div>
-        </li>
-        <li class="li_dtyj">
-          <div>
-            <h4 class="title_h4">答题原件</h4>
-            <a target="_blank" :href="dataDetail.answerCopyUrl" class="pos_1">在线查看</a><a :href="dataDetail.answerCopyUrl" :download="dataDetail.title" class="pos_2" >下载文件</a>
-          </div>
-        </li>
-      </ul>
-    </div><!-- report end -->
-    <div class="subject_video">
-      <h3 class="title_h3 bor_b_col_eee">试题视频解析</h3>
-      <div class="subject_error ml25">
-        <h5 class="size_16 col_d33 bold">错误题目解析视频</h5>
-        <dl class="cfix">
-          <dd v-for="(wrongData,index) in wrongDatas"><a @click='_dialog(wrongData,index)'>第{{wrongData.sequence}}题</a></dd>
-        </dl>
-      </div>
-      <div class="subject_torrect ml25">
-        <h5 class="size_16 col_73a bold">正确题目解析视频</h5>
-        <dl class="cfix">            
-          <dd v-for="(rightData,index) in rightDatas" v-if="index <= num"><a @click='_dialog(rightData)'>第{{rightData.sequence}}题</a></dd>
-          <dd class="dd_more" v-if="moreShow" @click="moreClick"><a>查看全部</a></dd>
-        </dl>
-      </div>
-      <!-- <div class="subject_torrect ml25 last-child">
-        <h5 class="size_16 col_73a bold">本卷知识点视频</h5>
-        <dl class="cfix">            
-          <dd v-for="(rightData,index) in rightDatas"><a>知识点</a></dd>
-        </dl>
-      </div> -->
-    </div><!-- word_video end -->
-    <a class="subject_more">智能配套习题</a>
-    <Modal v-model="modal1" :title="videoTitle" @on-cancel="cancel" width="672">
-      <video-player  ref="videoPlayer" :options="playerOptions" @ready="playerReadied"></video-player>
-    </Modal>
-  </div><!-- 考试记录详情页 end-->
+<div>
+  <div class="bgCom bg_col_eee"></div>
+  <div class="studentHome cfix">
+    <studentNav :message="this.$route.params.subjectid"></studentNav>
+    <!-- 考试记录详情页 start-->
+    <div id="student_detail" class="fRight studentDetail_right">
+      <div class="details">
+        <div class="details_header">
+          <h2 class="title_h2 bold mb12">{{dataDetail.title}}</h2>
+          <span class="time size_12">{{dataDetail.date}}</span>
+        </div>
+        <h3 class="title_h3 bor_b_col_eee">本次测试目标</h3>
+        <p>{{dataDetail.description}}</p>
+      </div><!-- details end -->
+      <div class="report">
+        <h3 class="title_h3 bor_b_col_eee">诊断报告下载</h3>
+        <ul class="report_list cfix">
+          <li class="li_zdbg">
+            <div>
+              <!-- <h4 class="title_h4">{{dataDetail.title}}</h4>
+              <span class="size_12 col_222">诊断报告</span> -->
+              <h4 class="title_h4">诊断报告</h4>
+              <a target="_blank" :href="dataDetail.report.url" class="pos_1">在线查看</a><a :href="dataDetail.report.url" download="dataDetail.title" class="pos_2">下载文件</a>
+            </div>
+          </li>
+          <li class="li_sjyj">
+            <div>
+              <h4 class="title_h4">试卷原件</h4>
+              <a target="_blank" :href="dataDetail.paper.copyUrl" class="pos_1">在线查看</a><a :href="dataDetail.paper.copyUrl" download="dataDetail.title" class="pos_2">下载文件</a>
+            </div>
+          </li>
+          <li class="li_dtyj">
+            <div>
+              <h4 class="title_h4">答题原件</h4>
+              <a target="_blank" :href="dataDetail.answerCopyUrl" class="pos_1">在线查看</a><a :href="dataDetail.answerCopyUrl" :download="dataDetail.title" class="pos_2" >下载文件</a>
+            </div>
+          </li>
+        </ul>
+      </div><!-- report end -->
+      <div class="subject_video">
+        <h3 class="title_h3 bor_b_col_eee">试题视频解析</h3>
+        <div class="subject_error ml25">
+          <h5 class="size_16 col_d33 bold">错误题目解析视频</h5>
+          <dl class="cfix">
+            <dd v-for="(wrongData,index) in wrongDatas"><a @click='_dialog(wrongData,index)'>第{{wrongData.sequence}}题</a></dd>
+          </dl>
+        </div>
+        <div class="subject_torrect ml25">
+          <h5 class="size_16 col_73a bold">正确题目解析视频</h5>
+          <dl class="cfix">            
+            <dd v-for="(rightData,index) in rightDatas" v-if="index <= num"><a @click='_dialog(rightData)'>第{{rightData.sequence}}题</a></dd>
+            <dd class="dd_more" v-if="moreShow" @click="moreClick"><a>查看全部</a></dd>
+          </dl>
+        </div>
+        <!-- <div class="subject_torrect ml25 last-child">
+          <h5 class="size_16 col_73a bold">本卷知识点视频</h5>
+          <dl class="cfix">            
+            <dd v-for="(rightData,index) in rightDatas"><a>知识点</a></dd>
+          </dl>
+        </div> -->
+      </div><!-- word_video end -->
+      <router-link :to="{name:'StudentExercises'}" class="subject_more">智能配套习题</router-link>
+      <Modal v-model="modal1" :title="videoTitle" @on-cancel="cancel" width="672">
+        <video-player  ref="videoPlayer" :options="playerOptions" @ready="playerReadied"></video-player>
+      </Modal>
+    </div><!-- 考试记录详情页 end-->
+  </div>
 </div>
 </template>
 <script>
@@ -160,10 +163,6 @@ export default {
 </script>
 
 <style>
-body{ background: #eee; }
-.studentHome{ width: 1200px; margin: 0 auto; }
-.studentDetail_right{ width: 940px; }
-.studentDetail_right{ padding: 0 28px; }
 /*student_detail*/
 .studentDetail_right{padding-bottom: 40px; padding-top: 32px;}
 .details_header{ padding-bottom: 22px;}

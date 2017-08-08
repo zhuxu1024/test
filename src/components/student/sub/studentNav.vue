@@ -11,6 +11,7 @@
     <li v-for="(item, index) in items" class="li_list" :class="{'li_list_active':id == index}" @click="sendMsgToParent(index)"><router-link :to="{name:'StudentIndex',params: {num: index}}" :class=" 'item_' + index ">{{item.title}}</router-link></li>
   </ul>   
   <div v-if="logout" class="exit li_list"><a>退出</a></div>
+  <p>{{message}}</p>
 </div><!-- 学生主页左侧导航 end -->
 </template>
 <script>
@@ -61,7 +62,6 @@ export default {
 </script>
 
 <style>
-body{ background: #eee !important; }
 .studentHome{ width: 1200px; margin: 0 auto; }
 .studentHome_left{ width: 240px; padding: 20px 35px;}
 .studentHome_logo, .user_info{ margin-bottom: 40px;}

@@ -5,6 +5,7 @@ import Login from '@/components/user/login'
 import Reg from '@/components/user/reg'
 import StudentIndex from '@/components/student/index'
 import StudentDetail from '@/components/student/detail'
+import StudentExercises from '@/components/student/exercises'
 import Manage from '@/components/manage/index'
 import AddGrade from '@/components/manage/grade/addSchool'
 import LookGrade from '@/components/manage/grade/lookSchool'
@@ -44,6 +45,11 @@ export default [
       path: '/student/detail/:id?/:subjectid?',
       name: 'StudentDetail',
       component: StudentDetail
+    },
+    {
+      path: '/student/exercises',
+      name: 'StudentExercises',
+      component: StudentExercises
     },
     {
       path: '/manage/index',
