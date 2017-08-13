@@ -2,7 +2,7 @@
 <div class="mTest manageCon fRight">
     <testNav :page="this.$route.params.page"></testNav><!-- 导航 -->
     <div class="mAddSchool tabCon cfix">
-     <Form :label-width="100" :model="formItem" ref="formItem" :rules="formItem">
+     <Form :label-width="100" :model="formItem">
         <Form-item label="考试名称：">
             <Input v-model="formItem.title" placeholder="请输入考试名称"></Input>
         </Form-item>
@@ -17,8 +17,8 @@
         <Form-item label="考试时长：">
             <div class="cfix"><div class="inputw40 fLeft"><Input v-model="formItem.date" placeholder="请输入考试用时分钟数"></Input></div><span class="minutesSpan fLeft">分钟</span></div>
         </Form-item>
-        <Form-item label="选择省市区">
-            <Select style="margin-right: 10px;" v-for="LinkageInfo in LinkageInfos" :value="LinkageInfo.id" :key="LinkageInfo.id" v-model="LinkageInfo.selValue" @on-change="onChangeCity(LinkageInfo)">
+        <Form-item label="选择年级：">
+            <Select style="margin-right: 10px;" v-for="LinkageInfo in LinkageInfos" :value="LinkageInfo.id" :key="LinkageInfo.id" v-model="LinkageInfo.selValue" @on-change="onChangeCity(LinkageInfo)" :placeholder="'请'+LinkageInfo.title">
                 <Option v-for="arrayList in LinkageInfo.arrayLists" :value="arrayList.id" :key="arrayList.id">{{arrayList.name}}</Option>
             </Select>
         </Form-item>
@@ -29,7 +29,7 @@
             </Radio-group>
         </Form-item>
         <Form-item label="选择试卷：">
-            <Select v-model="formItem.paperId" placeholder="请选择试卷">
+            <Select v-model="formItem.paperId" placeholder="请选择试卷" @on-change="getPaper(formItem.paperId)">
                 <Option :value="examPaper.id" :key="examPaper.id" v-for="examPaper in examPapers">{{examPaper.name}}</Option>
             </Select>
         </Form-item>
@@ -83,24 +83,28 @@ export default {
           }
       ],
       examPapers:[],
-      formItem: {
-        containnerId:'',
-        date:0,
-        description:'',
-        examTime:0,
-        paperId:'',
-        subjectId:'',
-        title:''
+      formItem:{
+        containnerId: "",
+        date: 0,
+        description: "",
+        examTime: 0,
+        paper: {},
+        subjectId: "",
+        title: ""
       },
-      formItem1: {
-        containnerId:'',
-        date:0,
-        description:'',
-        examTime:0,
-        paperId:'',
-        subjectId:'',
-        title:''
-      }
+      formItem1:{
+        containnerId: "",
+        date: 0,
+        description: "",
+        examTime: 0,
+        paper: {
+          copyUrl: "",
+          id: "",
+          name: ""
+        },
+        subjectId: "",
+        title: ""
+      },
     }
   },
   mounted(){
@@ -111,11 +115,13 @@ export default {
   methods:{
     onChangeCity: function(data){
         var that = this;
+        console.log(data.selValue)
         var i = data.id + 1;
         if( i <= that.LinkageInfos.length -1){
             that.$http.get('http://139.196.164.112:9988/v1/locations?parentId='+data.selValue)
               .then((response) => {
                 that.LinkageInfos[i].arrayLists = response.data;
+                console.log(that.LinkageInfos[i].arrayLists)
               }).catch(function (response) {
                 console.log(response)
             })
@@ -131,14 +137,22 @@ export default {
               .then((response) => {
                 //console.log(response.data)
                 that.examPapers = response.data;
-                //console.log(that.examPapers)
+                console.log(that.examPapers)
               }).catch(function (response) {
                 console.log(response)
             })
     },
-    addSchoolSubmit: function(){
+    getPaper: function(data){
       var that = this;
-      
+      for(var i = 0; i<that.examPapers.length; i++){
+        if(that.examPapers[i].id == data){
+          that.formItem.paper = that.examPapers[i];
+        }
+      }
+      console.log(that.formItem.paper)
+    },
+    addSchoolSubmit: function(){
+      var that = this;      
       if(that.formItem.title == '') {
         that.$message.error('请填写考试名称!');
       }else if(that.formItem.examTime == ''){
@@ -155,8 +169,9 @@ export default {
         that.$message.error('请选择试卷!');
       }else{
         that.formItem.examTime = Date.parse(that.formItem.examTime)/1000;
+        console.log(that.formItem)
         that.$http.post('http://139.196.164.112:9988/v1/exams?token='+that.userToken, that.formItem).then((response) => {
-          console.log(response)
+          //console.log(response.data)
           that.$message.success('提交成功!');
           that.formItem = that.formItem1;
           for(var i = 0; i < that.LinkageInfos.length; i++){

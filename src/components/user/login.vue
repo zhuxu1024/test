@@ -7,7 +7,7 @@
       <input type="text" placeholder="请输入手机号" class="inpText txt" v-bind:class="{'warn':isUesrName}" v-model="loginModel.accountName" >
       <input type="password" placeholder="请输入密码" v-model="loginModel.password" class="inpText psw" v-if="!isPassword" >
       <input type="text" placeholder="请输入密码" v-model="loginModel.password" class="inpText warn" v-if="isPassword" >
-      <input type="button" value="登  录" class="btn bor_col_73a bg_col_73a" v-on:click="btnSubmit">
+      <input type="button" value="登  录" class="btn bor_col_73a bg_col_73a" @click="btnSubmit">
       <div class="cfix pswBox">
         <a href="#" class="fLeft">找回密码</a>
         <div class="fRight cfix">
@@ -59,14 +59,18 @@ export default {
         that.isPassword = true;
         that.loginModel.password = "请输入正确的密码！";
       }else{
+        console.log(that.loginModel)
+        console.log(that.loginUrl)
         that.$http.post(that.loginUrl, that.loginModel)
           .then((response) => {
-            // console.log(result.data)//返回值;
             var result = response.data;
+            if(result.account.role == "student"){
+              that.$router.push({path: '/student/index/0'})
+            }else if(result.account.role == "Administrator"){
+              that.$router.push({path: '/grade/addSchool/1/0'})
+            }
             result = JSON.stringify(result);//json缓存需转换string
             localStorage.setItem('userInfo', result)
-            that.$router.push({path: '/student/index/0'})
-            //that.$router.push({path: '/grade/addSchool/1/0'})
           }).catch(function (response) {
             if(response.status == 401){
               that.isUesrName = true;
@@ -98,6 +102,6 @@ export default {
 </script>
   
 <style>
-@import "../../static/css/common_user.css";
+/*@import "../../static/css/common_user.css";*/
 .login{ width:368px; text-align:center;}
 </style>

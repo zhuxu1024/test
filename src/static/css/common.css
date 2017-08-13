@@ -15,13 +15,14 @@ cite,em{ font-style:normal;}
 #dlBox { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;}
 .fLeft, .record_nav dt, .dd_list, .report_list li, .subject_video dd{ float: left;}
 .fRight{ float: right;}
+.none{ display: none; }
 .ine_block, .li_list a, .test_li_list a.exercise, .test_li_list a.analyse{ display: inline-block; }
 .block, .reg_btn, .warn, .test_li_list span, .subject_more{ display:block;}
-.center, .reg_btn, .user_info, .li_list, .details_header, .subject_video dd, .agree{ text-align: center;}
+.center, .reg_btn, .user_info, .li_list, .details_header, .subject_video dd, .agree, .copyFooter{ text-align: center;}
 .cursor, .btn, .li_list, .btn_v1, .dd_list, .report_list li, .subject_video dd, .test_li_list, .record_select dl dd{ cursor:pointer;}
 .box_sizing, .checkboxFive, .inpText, .login, .register, .register, .studentHome_left, .record_seach, .studentDetail_right, .report_list li div, .record_select dl, .report_list li{ box-sizing:border-box;}
-.rel, .checkboxFive, .record_seach, .report_list li div, .reg_yzm{ position: relative; }
-.abs, .checkboxFive label, .checkboxFive label:after, .search_btn, .search_txt, .report_list li div a, .record_select dl{ position: absolute;}
+.rel, .checkboxFive, .record_seach, .report_list li div, .reg_yzm, .studentHome_left{ position: relative; }
+.abs, .checkboxFive label, .checkboxFive label:after, .search_btn, .search_txt, .report_list li div a, .record_select dl, .copyFooter{ position: absolute;}
 .bold, .user_name, .record_nav dt, .title_h3{ font-weight: bold; }
 .search_txt, .search_btn{ border: none; }
 /*size*/
@@ -31,9 +32,9 @@ cite,em{ font-style:normal;}
 .size_18{ font-size:18px; line-height: 18px;}
 .size_16, .inpText, .btn, .reg_btn, .li_list, .record_nav dt, .title_h3, .subject_more, .record_select dl, .title_h4{ font-size:16px; line-height: 16px;}
 .size_14, .user_school, .btn_v1, .dd_list a, .time, .test_li_list span, .test_li_list a.exercise, .test_li_list a.analyse, .details p, .subject_video dd, .questionList li, .studentExercises_right .ivu-tabs.ivu-tabs-card>.ivu-tabs-bar .ivu-tabs-tab, .questionList li .ivu-radio-wrapper{ font-size:14px;}
-.size_12{ font-size:12px;}
+.size_12, .copyFooter{ font-size:12px;}
 /*color*/
-.col_808, .inpText, .pswBox, .pswBox a, .user_school, .li_list a, .dd_list a, .time, .test_li_list span, .report_list li div a.pos_1, .agree, .record_select dl dd, .li_list a:hover{ color:#808080;}
+.col_808, .inpText, .pswBox, .pswBox a, .user_school, .li_list a, .dd_list a, .time, .test_li_list span, .report_list li div a.pos_1, .agree, .record_select dl dd, .li_list a:hover, .copyFooter{ color:#808080;}
 .col_222, .user_name, .record_nav dt, .title_h2, .search_txt, .details p, .title_h4, .subject_video dd a, .agree a, .record_select dl{ color: #222;}
 .col_73a, .reg_btn, .subject_video .title_h3, .report_list li div a.pos_2, .record_select dl dd:hover{ color:#73a92f;}
 .col_fff, .btn, .reg_btn:hover, .li_list_active a, .btn_v1, .btn_v1 a, .subject_more, .btn_v1, .subject_more:hover, .li_list_active a:hover, .test_li_list a.exercise:hover, .test_li_list a.analyse:hover, .studentExercises_right .ivu-tabs.ivu-tabs-card>.ivu-tabs-bar .ivu-tabs-tab{ color:#fff;}
@@ -69,6 +70,7 @@ cite,em{ font-style:normal;}
 .mb15, .test_li_list span{ margin-bottom: 15px; }
 .mb12, .test_list li{ margin-bottom: 12px; }
 .ml25{ margin-left: 25px; }
+.mr15{ margin-right: 15px; }
 /*line-height*/
 .record_nav, .btn_v1{height: 24px; line-height: 24px;}
 .report_list li div a, .btn_v1{ border-radius: 12px;}
@@ -81,3 +83,30 @@ cite,em{ font-style:normal;}
 .studentHome_right, .studentDetail_right, .studentExercises_right{ width: 940px; }
 .chart, .record, .studentDetail_right{ padding: 0 28px; }
 .test_list_center, .test_list_right{ padding: 30px 30px 0 30px; }
+/*regLogin*/
+.userBg{ background: #f6f6f6 url("../img/login_bg.png") no-repeat 0 center;}
+.login, .register{ height:480px; margin:0 auto; padding:40px 50px 0; border-radius: 4px; box-shadow: 0px 3px 7px 0px rgba(115, 169, 47, 0.1);}
+.user_logo{ margin-bottom:44px;}
+.inpText, .btn, .reg_btn{ width:272px; height:48px; line-height:48px; border-radius:4px;}
+.inpText{ padding:0 12px 0 35px; -webkit-transition: all 0.30s ease-in-out; -moz-transition: all 0.30s ease-in-out; -ms-transition: all 0.30s ease-in-out; -o-transition: all 0.30s ease-in-out; outline: none;}
+.inpText:focus, .yzmBorder{ box-shadow: 0 0 5px rgba(115, 169, 47, 1); color:#222;}
+.txt{ background-position:-275px -144px;}
+.psw{ background-position:-275px -48px;}
+.txt:focus{ background-position:-275px -96px;}
+.psw:focus{ background-position:-275px 0px;}
+.warn{ box-shadow: 0 0 5px rgba(219, 22, 22, 1); background-position:-275px -192px; animation: antzone 0.4s ease-out both; text-align: left;}
+@keyframes antzone {
+  0% { transform: none;}
+  15% { transform: translate3d(-1.2%,0,0);}
+  30% { transform: translate3d(1.1%,0,0);}
+  45% { transform: translate3d(-0.9%,0,0);}
+  60% { transform: translate3d(0.7%,0,0);}
+  75% { transform: translate3d(-0.5%,0,0);}
+  100% { transform: none;}
+}
+.pswBox{ padding:0 18px; height: 16px; line-height: 16px;}
+input[type=checkbox]{ opacity: 0;}
+.checkboxFive{ width: 12px; height: 12px; margin: 1px 0 0 6px;}
+.checkboxFive label{ cursor: pointer; width: 13px; height: 13px; top: 1px; left: 0;}
+.checkboxFive label:after{ opacity: 0; content: ''; width: 8px; height: 5px; background: transparent; top: 2px; left: 2px; border: 2px solid #73a92f; border-top: none; border-right: none; -webkit-transform: rotate(-54deg); -moz-transform: rotate(-54deg); -o-transform: rotate(-54deg); -ms-transform: rotate(-54deg); transform: rotate(-54deg);}
+.checkboxFive input[type=checkbox]:checked + label:after { opacity: 1;}

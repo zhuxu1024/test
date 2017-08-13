@@ -13,9 +13,11 @@ export default {
   components: {
     manageNav
   },
-  data () {
-    return {
-      
+   mounted(){
+    var userInfo = JSON.parse(localStorage.getItem('userInfo'));//存入缓存的string转换成json
+    this.userToken = userInfo.token; 
+    if(this.userToken == ''){
+      this.$router.push({path: '/user/login'})
     }
   }
 }

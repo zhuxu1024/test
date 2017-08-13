@@ -4,7 +4,7 @@
       <Menu-item name="1-1"><router-link :to="{name:'AddGrade',params: {index: 1, page: 0}}">学校年级班级管理</router-link></Menu-item>
       <Menu-item name="1-2"><router-link :to="{name:'UploadInfo',params: {index: 2, page: 0}}">学生信息导入</router-link></Menu-item>
       <Menu-item name="1-3"><router-link :to="{name:'AddTest',params: {index: 3, page: 0}}">新增测验</router-link></Menu-item>
-      <Menu-item name="1-4"><router-link :to="{name:'AnalysisVideoTest',params: {index: 4, page: 0}}">上传解析视频</router-link></Menu-item>
+      <Menu-item name="1-4"><router-link :to="{name:'AnalysisVideoTest',params: {index: 4, page: 0}}">上传题目</router-link></Menu-item>
     </Menu>
   </div>
 </template>

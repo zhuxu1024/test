@@ -61,7 +61,7 @@
         </div> -->
       </div><!-- word_video end -->
       <router-link :to="{name:'StudentExercises'}" class="subject_more">智能配套习题</router-link>
-      <Modal v-model="modal1" :title="videoTitle" @on-cancel="cancel" width="672">
+      <Modal v-model="modal1" :title="videoTitle" @on-cancel="cancel" width="672" class="dialogDetail">
         <video-player  ref="videoPlayer" :options="playerOptions" @ready="playerReadied"></video-player>
       </Modal>
     </div><!-- 考试记录详情页 end-->
@@ -193,6 +193,5 @@ export default {
 .subject_video dd.dd_more{ width: 175px; }
 .subject_video dd.dd_more a{ background-position: right -505px; padding-right: 18px; }
 .subject_more{ width: 272px; height: 48px; line-height: 48px; text-align: center; border-radius: 8px; margin: 0 auto; background-position: -99px -447px; margin-top: 34px;}
-.ivu-modal-footer{ display: none; }
-.ivu-icon-ios-close-empty:before{}
+.dialogDetail .ivu-modal-footer{ display: none; }
 </style>

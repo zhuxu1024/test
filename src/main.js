@@ -21,7 +21,8 @@ Vue.use(iView);
 Vue.use(VueFileUpload);
 Vue.use(Element);
 const router = new VueRouter({
-	routes
+	routes,
+	mode:'history'
 })
 
  // // 全局导航钩子

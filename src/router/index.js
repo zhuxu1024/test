@@ -38,7 +38,6 @@ export default [
     {
       path: '/student/index/:num?',
       name: 'StudentIndex',
-      //meta: { requiresAuth: true },
       component: StudentIndex
     },
     {

@@ -3,47 +3,23 @@
     <infoNav :page="this.$route.params.page"></infoNav><!-- 导航 -->
     <div class="tabCon cfix">
      <Form :model="formItem" :label-width="100">
-        <Form-item label="选择省市区">
-            <Select v-model="formItem.selectArea" placeholder="请选择">
-                <Option value="beijing">北京市</Option>
-                <Option value="shanghai">上海市</Option>
-                <Option value="shenzhen">深圳市</Option>
-            </Select>
-        </Form-item>
-        <Form-item label="选择学校名称">
-            <Select v-model="formItem.selectSchool" placeholder="请选择">
-                <Option value="beijing">北京市</Option>
-                <Option value="shanghai">上海市</Option>
-                <Option value="shenzhen">深圳市</Option>
-            </Select>
-        </Form-item>
-        <Form-item label="选择年级">
-            <Checkbox-group v-model="formItem.checkbox">
-                <Checkbox label="6年级"></Checkbox>
-                <Select v-model="model_6" style="width:100px; margin-right:15px;"><Option v-for="item in num_6" :value="item" :key="item">{{ item }}</Option></Select>
-                <Checkbox label="7年级"></Checkbox>
-                <Select v-model="model_7" style="width:100px; margin-right:15px;"><Option v-for="item in num_7" :value="item" :key="item">{{ item }}</Option></Select>
-                <Checkbox label="8年级"></Checkbox>
-                <Select v-model="model_8" style="width:100px; margin-right:15px;"><Option v-for="item in num_8" :value="item" :key="item">{{ item }}</Option></Select>
-            </Checkbox-group>
-        </Form-item>
+        <Form-item label="选择班级">
+                <Select style="margin-right: 10px;" v-for="LinkageInfo in LinkageInfos" :value="LinkageInfo.id" :key="LinkageInfo.id" v-model="LinkageInfo.selValue" @on-change="onChangeCity(LinkageInfo)" :placeholder="'请'+LinkageInfo.title">
+                    <Option v-for="arrayList in LinkageInfo.arrayLists" :value="arrayList.id" :key="arrayList.id">{{arrayList.name}}</Option>
+                </Select>
+            </Form-item>
         <Form-item>
-            <Button type="primary">查询</Button>
+            <Button type="primary" @click="getStudentList">查询</Button>
         </Form-item>
     </Form>
     <div class="layout">
-    
-        <Row class="layoutTitle">
-            <i-col span="12"><div class="layout-content-main borderRight">学生名单</div></i-col>
-            <i-col span="12"><div class="layout-content-main">学生详情</div></i-col>
-        </Row>
         <Row>
-            <i-col span="6">
-                <Table highlight-row :columns="columns3" :data="data1"></Table>
+            <i-col span="24">
+                <Table highlight-row :columns="columns3" :data="students"></Table>
             </i-col>
-            <i-col span="18">
+            <!-- <i-col span="16">
                 <div class="layout-content-main">
-                    <Form :model="formItem" :label-width="100">
+                    <Form :label-width="100">
                         <Form-item label="学生">
                             0501 张三 男
                         </Form-item>
@@ -62,7 +38,7 @@
                         </Form-item>
                     </Form>
                 </div>
-            </i-col>
+            </i-col> -->
         </Row>
     </div>
   </div>
@@ -78,71 +54,116 @@ export default {
   },
   data () {
     return {
-      formItem: {
-        input: '',
-        selectArea: '',
-        selectSchool: '',
-        radio: 'male',
-        checkbox: [],
-        switch: true,
-        date: '',
-        time: '',
-        slider: [20, 50],
-        textarea: ''
+        containnerId:'',
+        userToken:'',
+        LinkageInfos:[
+          {
+            arrayLists:[{
+                  id: "101",
+                  name: "上海",
+                  type: null
+              }
+            ],
+            id:0,
+            title:'选择市',
+            selValue:''
+          },
+          {
+            arrayLists:[],
+            id:1,
+            title:'选择地区',
+            selValue:''
+          },
+          {
+            arrayLists:[],
+            id:2,
+            title:'选择学校',
+            selValue:''
+          },
+          {
+            arrayLists:[],
+            id:3,
+            title:'选择年级',
+            selValue:''
+          },
+          {
+            arrayLists:[],
+            id:4,
+            title:'选择班级',
+            selValue:''
+          }
+        ],
+        formItem: {
+            checkbox:[],
+            input:''
     	},
-	    num_6: [1,2,3,4,5,6,7,8,9,10],
-	    num_7: [1,2,3,4,5,6,7,8,9,10],
-	    num_8: [1,2,3,4,5,6,7,8,9,10],
-	    model_6: '',
-	    model_7: '',
-	    model_8: '',
+        num_6: [1,2,3,4,5,6,7,8,9,10],
+        num_7: [1,2,3,4,5,6,7,8,9,10],
+        num_8: [1,2,3,4,5,6,7,8,9,10],
+        model_6: '',
+        model_7: '',
+        model_8: '',
         columns3: [
-                    {
-                        title: '学号',
-                        key: 'number'
-                    },
-                    {
-                        title: '姓名',
-                        key: 'name'
-                    },
-                    {
-                        title: '性别',
-                        key: 'sex'
+            {
+                title: '学号',
+                key: 'no'
+            },
+            {
+                title: '姓名',
+                key: 'name'
+            },
+            {
+                title: '性别',
+                key: 'gender'
+            }
+        ],
+        students: []
+    }
+  },
+  mounted(){
+    var userInfo = JSON.parse(localStorage.getItem('userInfo'));//存入缓存的string转换成json
+    this.userToken = userInfo.token; 
+    console.log(this.userToken)
+  },
+  methods:{
+    onChangeCity: function(data){
+        var that = this;
+        var i = data.id + 1;
+        if( i <= that.LinkageInfos.length -1){
+            that.$http.get('http://139.196.164.112:9988/v1/locations?parentId='+data.selValue)
+              .then((response) => {
+                that.LinkageInfos[i].arrayLists = response.data;
+              }).catch(function (response) {
+                console.log(response)
+            })
+        }
+        if( i == that.LinkageInfos.length){
+          that.containnerId = data.selValue;
+          console.log(that.containnerId)
+        }
+    },
+    getStudentList: function(){
+        var that = this;
+        that.$http.get('http://139.196.164.112:9988/v1/students/queryStudent?token='+this.userToken+'&classId='+that.containnerId)
+              .then((response) => {
+                console.log(response.data)
+                var result = response.data;
+                for(var i=0; i<result.length; i++){
+                    if(result[i].gender == 0){
+                        result[i].gender = '男'
+                    }else{
+                        result[i].gender = '女'
                     }
-                ],
-                data1: [
-                    {
-                        number: '0501',
-                        name: '张三',
-                        sex: '男'
-                    },
-                    {
-                        number: '0501',
-                        name: '张三',
-                        sex: '男'
-                    },
-                    {
-                        number: '0501',
-                        name: '张三',
-                        sex: '男'
-                    },
-                    {
-                        number: '0501',
-                        name: '张三',
-                        sex: '男'
-                    },
-                ]
+                }
+                that.students = result;
+              }).catch(function (response) {
+                console.log(response)
+            })
     }
   }
 }
 </script>
 
 <style>
-    .layout{border: 1px solid #d7dde4; background: #fff;}
-    .layoutTitle{text-align: center; border-bottom:1px solid #d7dde4; background: #f5f7f9;}
-    .borderRight{border-right:1px solid #d7dde4;}
-    .layout-content-main{padding: 10px;}
-    .layout .ivu-table-wrapper{border:none;}
-    .layout .ivu-table th{ background:#fff; }
-    .ivu-table:before{ height: 0; }
+.layout{ width: 688px; margin-left: 100px; }   
 </style>

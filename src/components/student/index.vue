@@ -6,7 +6,7 @@
     <!-- 学生主页左侧导航 end -->
     <!-- 考试记录 start -->
     <div id="student_index" class="fRight studentHome_right">
-      <div class="chart mb12"><img src="../../static/img/img_chart.png"></div>
+      <div class="chart mb12 none"><img src="../../static/img/img_chart.png"></div>
       <div class="record_box">
         <div class="cfix record">
           <dl class="record_nav fLeft">
@@ -27,7 +27,7 @@
               <p><a class="exercise btn_v1">练习提高</a><a class="analyse btn_v1">查看分析</a></p>
             </div>
             </router-link>
-          </li>          
+          </li>
         </ul><!-- 考试记录列表 end -->
       </div>
     </div><!-- 考试记录 end -->
@@ -55,6 +55,9 @@ export default {
     var userInfo = JSON.parse(localStorage.getItem('userInfo'));//存入缓存的string转换成json
     // console.log(userInfo);
     this.userToken = userInfo.token; 
+    if(this.userToken == ''){
+      this.$router.push({path: '/user/login'})
+    }
     console.log(this.userToken);
     this.listId = this.$route.params.num?this.$route.params.num:0;
     this.getListData(this.listId);
@@ -72,13 +75,16 @@ export default {
       // subjectId删除获取全部列表
       this.$http.get(listUrl)
         .then((response) => {
-          console.log(response.data)
-          this.dataLists = response.data.data;
-          console.log(this.dataLists)
+          //console.log(response.data.data)
+          var result = response.data.data;
+          for(var i = 0; i < result.length; i++){
+            result[i].examData.date = this._date(result[i].examData.date);
+          }
+          this.dataLists = result;
+          //console.log(this.dataLists)
         }).catch(function (response) {
           console.log(response)
           console.log('登录验证过期，请重新登录后查看！')
-            //this.$router.push({path: '/user/login'})
           })
     },
     _date: function(date){//时间戳转换格式

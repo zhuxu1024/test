@@ -1,8 +1,9 @@
 <template>
   <div class="home">
-    <!-- <router-link to="/user/login">登录</router-link><br>
-    <router-link to="/user/reg">注册</router-link> -->
-    <!-- <router-view></router-view> -->
+   <!-- <router-link to="/user/login">登录</router-link><br>
+   <router-link to="/user/reg">注册</router-link><br>
+   <router-link :to="{name:'AddGrade',params: {index: 1,page: 0}}">后台管理</router-link>
+   <router-view></router-view>  -->
     <div class="home_page">
     	<div class="home_header">
             <div class="home_nav wd_1200">
@@ -12,12 +13,12 @@
                     <li class="ml_110"><a href="#home_wraper_four">关于我们</a></li>
                     <router-link to="/user/reg">
                         <li class="ml_110">
-                            <router-link to="/user/reg">账号注册</router-link>
+                            <a href="">账号注册</a>
                         </li>
                     </router-link>
                     <router-link to="/user/login">
                         <li class="ml_110">
-                        	<router-link to="/user/login" class="current">用户登录</router-link>
+                            <a class="current">用户登录</a>
                         </li>
                     </router-link>
                 </ul>
@@ -26,7 +27,7 @@
     	<div class="home_wraper">
     		<div class="home_wraper_one">
     			<div class="banner">
-                    <Carousel autoplay>
+                    <Carousel autoplay v-model="value2">
                         <Carousel-item>
                             <div class="demo-carousel">
                               <img src="../static/img/banner1.png" width="100%">
@@ -112,16 +113,20 @@
     	</div>
     </div>
   </div>
+
 </template>
-
 <script>
-
+import banner from '@/components/banner/banner';
 export default {
    name: 'Home',
+   components: {
+    banner
+  }
 }
 </script>
 
 <style>
+body{background: #fff;}
 .wd_1200{
 	width: 1200px;
 	margin:0 auto;
@@ -248,7 +253,9 @@ export default {
  }
 .expert_team .member_one:hover{
   	box-shadow: 0px 20px 60px 0px rgba(0, 0, 0, 0.3);
-  	
+  	transform:translate(0px,-3px);
+	-ms-transform:translate(0px,-3px); /* IE 9 */
+	-webkit-transform:translate(0px,-3px); /* Safari and Chrome */
   }
  .expert_team .member_one img{
  	width: 170px;

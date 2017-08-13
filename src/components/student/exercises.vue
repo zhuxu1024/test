@@ -53,6 +53,13 @@
               </Radio-group>
             </li>
           </ul>
+          <div class="addition">
+            <div>
+              答案：
+              <span v-for="answerList in answerLists" :key="answerList.id">{{answerList.answer}}</span>
+            </div>
+          </div>
+          <button type="button" class="bor_col_73a bg_col_73a btn">提交练习卷</button>
         </Tab-pane>
         <Tab-pane label="整式">标签二的内容</Tab-pane>
         <Tab-pane label="同类项">标签三的内容</Tab-pane>
@@ -79,6 +86,28 @@ export default {
       radio3:false,
       radio4:false,
       radio5:false,
+      answerLists:[
+        {
+          id:0,
+          answer:'A'
+        },
+        {
+          id:2,
+          answer:'B'
+        },
+        {
+          id:3,
+          answer:'C'
+        },
+        {
+          id:4,
+          answer:'D'
+        },
+        {
+          id:5,
+          answer:'B'
+        },
+      ]
    	}
   },
   mounted(){
@@ -101,7 +130,9 @@ export default {
   .studentExercises_right .ivu-tabs.ivu-tabs-card>.ivu-tabs-bar .ivu-tabs-tab:nth-of-type(6){background-color: #a74fbf;}
   .studentExercises_right .ivu-tabs.ivu-tabs-card>.ivu-tabs-bar .ivu-tabs-tab.ivu-tabs-tab-active{  background-color:#fff; background-position: 30px -672px;transform:none;padding: 0 30px 0 50px;}
   .studentExercises_right .ivu-tabs .ivu-tabs-tabpane{ padding: 12px 30px; }
-  .questionList li{ border-radius: 8px; padding: 32px 46px;}
+  .questionList li{ border-radius: 8px; padding: 32px 46px; position: relative;}
+  .questionList li.errorLi{}
+  .questionList li.correctLi{}
   .questionList li:nth-of-type(even){ background-color: #eee; }
   .questionList li p{ line-height: 24px; margin-bottom: 22px;}
   .questionList li .ivu-radio-wrapper{width: 180px;}
@@ -110,7 +141,5 @@ export default {
   .ivu-radio-checked .ivu-radio-inner:after{-ms-transform: rotate(-54deg); transform: rotate(-54deg); transition: all .2s ease-in-out; }
   .ivu-radio-inner:after {position: absolute;width: 10px;height: 6px;left: 3px;top: 3px;border-radius: 0; content: ' ';background: transparent; border: 2px solid #fff; opacity: 0; border-top: none; border-right: none;-webkit-transform: rotate(-54deg); -moz-transform: rotate(-54deg); -o-transform: rotate(-54deg); -ms-transform: rotate(-54deg); transform: rotate(-54deg);
   }
-
-
-
+  .studentExercises_right .btn{ margin: 12px auto; display: block; }
 </style>
