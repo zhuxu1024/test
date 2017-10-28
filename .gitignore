@@ -11,3 +11,9 @@ yarn-error.log*
 *.ntvs*
 *.njsproj
 *.sln
+*.a
+!lib.a
+/TODO
+build/
+doc/*.txt
+doc/**/*.txt
